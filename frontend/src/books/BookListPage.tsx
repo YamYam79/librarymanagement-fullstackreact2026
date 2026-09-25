@@ -68,7 +68,11 @@ export function BookListPage() {
           </thead>
           <tbody>
             {books.map((book) => (
-              <tr className="book-item" key={book.id ?? `${book.title}-${book.author}`}>
+              <tr
+                className="book-item"
+                data-cy="book-item"
+                key={book.id ?? `${book.title}-${book.author}`}
+              >
                 <td>{book.title}</td>
                 <td>{book.author}</td>
                 <td>{book.available_copies}</td>

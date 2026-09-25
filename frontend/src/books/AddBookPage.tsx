@@ -5,6 +5,7 @@ import { bookService } from './book-service';
 
 export function AddBookPage() {
   const navigate = useNavigate();
+
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [totalCopies, setTotalCopies] = useState(1);
@@ -19,6 +20,7 @@ export function AddBookPage() {
         available_copies: totalCopies,
         total_copies: totalCopies,
       });
+
       navigate('/');
     } catch (error) {
       console.error('Erreur lors de l’ajout du livre', error);
@@ -36,6 +38,7 @@ export function AddBookPage() {
             type="text"
             id="title"
             name="title"
+            data-cy="title-input"
             required
             value={title}
             onChange={(event) => setTitle(event.target.value)}
@@ -48,6 +51,7 @@ export function AddBookPage() {
             type="text"
             id="author"
             name="author"
+            data-cy="author-input"
             required
             value={author}
             onChange={(event) => setAuthor(event.target.value)}
@@ -60,14 +64,22 @@ export function AddBookPage() {
             type="number"
             id="copies"
             name="totalCopies"
+            data-cy="copies-input"
             required
             min="1"
             value={totalCopies}
-            onChange={(event) => setTotalCopies(Number(event.target.value))}
+            onChange={(event) =>
+              setTotalCopies(Number(event.target.value))
+            }
           />
         </label>
 
-        <button type="submit">Add Book</button>
+        <button
+          type="submit"
+          data-cy="submit-book"
+        >
+          Add Book
+        </button>
       </form>
     </>
   );

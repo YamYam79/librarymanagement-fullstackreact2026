@@ -9,6 +9,7 @@ export function App() {
       <nav>
         <Link to="/">Book List</Link>
         <Link to="/add">Add Book</Link>
+        <Link to="/add" data-cy="add-book"> Add Book </Link>
       </nav>
 
       <Routes>
