@@ -9,9 +9,15 @@ const getBookById = (id, callback) => {
 };
 
 const createBook = (book, callback) => {
-  if (!book.title || !book.author || book.copies < 0) {
+  if (
+    !book.title ||
+    !book.author ||
+    book.available_copies < 0 ||
+    book.total_copies <= 0
+  ) {
     return callback(new Error("Invalid book data"));
   }
+
   bookModel.createBook(book, callback);
 };
 
@@ -34,4 +40,5 @@ export default {
   borrowBook,
   returnBook,
   deleteBook,
+
 };

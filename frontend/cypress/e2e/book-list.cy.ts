@@ -61,6 +61,13 @@ describe('Book list', () => {
 
         // Attendre la requête HTTP
         cy.wait('@addBook');
+
+        // Vérifier que le livre apparaît dans la liste
+        cy.contains('Le Seigneur des Anneaux')
+            .should('be.visible');
+
+        cy.contains('J.R.R. Tolkien')
+            .should('be.visible');
     });
 
     // Supprimer un livre
@@ -98,6 +105,10 @@ describe('Book list', () => {
 
         // Attendre la requête HTTP
         cy.wait('@deleteBook');
+
+        //Vérifier que le livre n'est plus visible
+        cy.contains('Dune')
+            .should('not.exist');
     });
 
     // Emprunter un livre
@@ -130,13 +141,20 @@ describe('Book list', () => {
         // Vérifier la présence du livre
         cy.contains('Dune');
 
+        // Vérifier l'état initial (3 exemplaires disponibles)
+        cy.get('.book-item')
+            .should('contain.text', '3');
+
         // Cliquer sur Borrow
         cy.contains('Borrow').click();
 
         // Attendre la requête HTTP
         cy.wait('@borrowBook');
-    });
 
+        // Vérifier que le nombre d'exemplaires a diminué
+        cy.get('.book-item')
+            .should('contain.text', '2');
+    });
 });
 
 // Remarque :
